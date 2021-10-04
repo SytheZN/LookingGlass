@@ -162,6 +162,9 @@ void waylandMinimize(void)
 
 void waylandShellResize(int w, int h)
 {
+  if (!libdecor_frame_is_floating(wlWm.libdecorFrame))
+    return;
+
   wlWm.width = w;
   wlWm.height = h;
 
