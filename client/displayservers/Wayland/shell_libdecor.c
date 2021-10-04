@@ -52,7 +52,7 @@ static void libdecorFrameConfigure(struct libdecor_frame * frame,
     struct libdecor_configuration * configuration, void * opaque)
 {
   int width, height;
-  if (libdecor_configuration_get_content_size(configuration, frame, &width, &height)) 
+  if (libdecor_configuration_get_content_size(configuration, frame, &width, &height))
   {
     wlWm.width = width;
     wlWm.height = height;
@@ -112,7 +112,7 @@ bool waylandShellInit(const char * title, bool fullscreen, bool maximize, bool b
   libdecor_frame_set_app_id(wlWm.libdecorFrame, "looking-glass-client");
   libdecor_frame_set_title(wlWm.libdecorFrame, title);
   libdecor_frame_map(wlWm.libdecorFrame);
-  
+
   if (resizable)
     libdecor_frame_set_capabilities(wlWm.libdecorFrame, LIBDECOR_ACTION_RESIZE);
   else
