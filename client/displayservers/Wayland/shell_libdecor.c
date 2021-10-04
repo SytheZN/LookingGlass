@@ -53,7 +53,7 @@ static void libdecorFrameConfigure(struct libdecor_frame * frame,
 {
   if (!wlWm.configured)
   {
-    xdg_surface_ack_configure(libdecor_frame_get_xdg_surface(frame),configuration->serial);
+    xdg_surface_ack_configure(libdecor_frame_get_xdg_surface(frame), configuration->serial);
     wlWm.configured = true;
     return;
   }
