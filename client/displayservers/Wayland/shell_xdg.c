@@ -156,4 +156,5 @@ void waylandMinimize(void)
 
 void waylandShellResize(int w, int h)
 {
+  //TODO: Implement resize for XDG.
 }
