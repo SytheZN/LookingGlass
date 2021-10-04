@@ -51,6 +51,13 @@ static void libdecorHandleError(struct libdecor * context, enum libdecor_error e
 static void libdecorFrameConfigure(struct libdecor_frame * frame,
     struct libdecor_configuration * configuration, void * opaque)
 {
+  if (!wlWm.configured)
+  {
+    xdg_surface_ack_configure(libdecor_frame_get_xdg_surface(frame),configuration->serial);
+    wlWm.configured = true;
+    return;
+  }
+
   int width, height;
   if (libdecor_configuration_get_content_size(configuration, frame, &width, &height))
   {
@@ -66,15 +73,10 @@ static void libdecorFrameConfigure(struct libdecor_frame * frame,
   if (libdecor_configuration_get_window_state(configuration, &windowState))
     wlWm.fullscreen = windowState & LIBDECOR_WINDOW_STATE_FULLSCREEN;
 
-  if (wlWm.configured)
-  {
-    wlWm.needsResize = true;
-    wlWm.resizeSerial = configuration->serial;
-    app_invalidateWindow(true);
-    waylandStopWaitFrame();
-  }
-  else
-    wlWm.configured = true;
+  wlWm.needsResize = true;
+  wlWm.resizeSerial = configuration->serial;
+  app_invalidateWindow(true);
+  waylandStopWaitFrame();
 }
 
 static void libdecorFrameClose(struct libdecor_frame * frame, void * opaque)
